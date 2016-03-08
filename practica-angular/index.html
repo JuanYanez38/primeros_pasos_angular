@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="miApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Trabajando con AngularJS</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+
+	
+</head>
+<body>
+    <div class="container">
+    	<div class="row">
+	    	<header class="col-md-12">
+	    		
+			<!-- Aqui Incluimos la cabecera y la informacion de la pagina  -->
+
+	    	</header>
+	    		
+    		<div class="jumbotron">
+    		<div ng-controller="circ">
+    		<label> Diametro </label>
+			<input type="text"ng-model="diametro" > <br>
+			<button class="btn btn-info" ng-click="calcular()" > Calcular Circunferencia </button>  
+			{{circ}}  
+
+			</div>	
+    		</div>	
+    		<div class="row"> 
+	    		<div ng-controller="controlador1">
+		    		<div class="col-md-12">
+						<div class="panel panel-primary"> 
+							<h1> Agenda Telefonica</h1>
+							<label>Buscar Contacto</label>
+							<input type="search" ng-model="buscar">
+						</div>
+						<div class="panel-body">
+							<p ng-repeat = "entrada in agenda |filter: buscar">
+								{{entrada.nombre}}  {{entrada.apellido}} : {{entrada.telefono}}
+
+							</p>
+						</div>
+
+		    		</div>
+	    		</div>
+	    		<div ng-controller="controlador2">
+	    			<button ng-click="clickSimple()" ng-dblclick="clickDoble()"> Haz Click </button><br><br>
+	    			
+	    			<img class="img-rounded" src="imagen/roca.jpg" alt="Villa Callirrhoe" ng-mouseleave="sale() " ng-mouseenter="entra()">
+
+					<h1>{{evento}}</h1>
+	    		</div>
+    		</div>
+
+    	</div>
+    </div>
+
+
+	<script>
+			var  miAplicacion = angular.module( 'miApp', []) 
+			miAplicacion.controller( 'circ', ['$scope', function($scope){
+
+				var pi = 3.1416
+				$scope.calcular=function () {
+					$scope.circ= $scope.diametro * pi
+				}
+			} ] )
+
+			miAplicacion.controller( 'controlador1', ['$scope', function($scope)
+			{
+				$scope.agenda = [
+				{nombre:'Juan', apellido:'Yanez', telefono:'04122163657'},
+				{nombre:'Jesus', apellido:'Leiva', telefono:'04122163657'},
+				{nombre:'Jose', apellido:'Serrano', telefono:'04122163657'},
+				{nombre:'Diana', apellido:'Aurrecochea', telefono:'04122163657'},
+				{nombre:'Junielt', apellido:'Yanez', telefono:'04122163657'},
+				{nombre:'Juan Ruben', apellido:'Yanez', telefono:'04122163657'},
+				{nombre:'Rubjuandry', apellido:'Yanez', telefono:'04122163657'},
+				{nombre:'Jose', apellido:'Yanez', telefono:'999118501'}
+
+				]
+
+			} ] )
+
+			miAplicacion.controller( 'controlador2', ['$scope', function($scope){
+
+				$scope.clickSimple = function(){
+					$scope.evento= "click"
+				}
+				$scope.clickDoble =function(){
+					$scope.evento="doble"
+				}
+				$scope.entra = function(){
+					$scope.evento= "Mouse entra en la Imagen"
+				}
+				$scope.sale =function(){
+					$scope.evento="Mouse sale de la Imagen"
+				}
+
+
+			}])
+		
+
+	</script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+</body>
+</html>

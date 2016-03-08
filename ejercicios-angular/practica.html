@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='holamundo'>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Hola Mundo</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js" ></script>
+</head>
+<body >
+	<h1>{{"Mi Aplicacion AngularJS #" + 1 |uppercase}}</h1>
+	<p> numero:  {{5*5}} <br /> Mas compleja la Operacion: {{ (300-10)/100*7.5 }}
+	<!-- Hasta el Momento es sencillo y muy funcional ahora vamos a adentrar un elemento que se llama controlador esta es la forma que usualmente usa Angular Para mostrar datos a traves de plantillas html u otras formas dinamicas -->
+	<div ng-controller="mycontrolador">
+		<h1>{{mensaje}} </h1> <br />
+		<!--En AngularJS $scope es un Objeto especial que permite relacionar los datos entre el controlador y el HTML para asignar un valor dentro de un controlador al relacionarlo solo debes usar la propiedad en la expresion asi como se muestra en este ejemplo.-->
+		{{segundomensaje}} 
+		<!-- Ahora vamos a Insertar valores a los objeto por decirlo asi del curso  en el objeto scope y veamos como dinamicamente se contruye un contenido-->
+		<p>Este curso es dictado por: {{curso.profesor}}, Referente a: {{curso.asunto}} el cual contiene, {{curso.contenido}} y nos encontramos viendo los ejercicios correspondientes a {{curso.ejemplo}} </p> <br>
+		<!-- Ahora vamos a inserta otra importante caractectica de angularJS la cual son los metodos ahora veremos un ejemplo -->
+		<p>Este es nuestro numero Aleatorio: {{ numeroAleatorio() }}</p>
+		
+	</div>
+	<script>
+		var miAppAngular = 	angular.module('holamundo', []);
+
+		miAppAngular.controller('mycontrolador', function($scope) {
+
+			$scope.mensaje = "Bienvenidos a AngularJS";
+			$scope.segundomensaje = "Ahora JavaScript esta en tus manos";
+			$scope.curso = {};
+			$scope.curso.profesor="Juan Yanez";
+			$scope.curso.asunto="Programacion de Pagina Web";
+			$scope.curso.contenido="HTML,CSS,JS,WebDesing,PHP";
+			$scope.curso.ejemplo="AngularJS" ; 
+
+			$scope.numeroAleatorio = function() {
+			return Math.floor( Math.random() * 100);
+		}
+
+			
+		});
+
+	</script>
+	
+</body>
+</html>
